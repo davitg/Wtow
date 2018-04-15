@@ -1,0 +1,12 @@
+﻿
+<div class="row">
+
+    <div class="title-tile col-md-4 well well-sm" *ngFor="let t of titles">
+        <img [src]="t.poster"  [alt]="t.name" class="img-responsive"/>
+        <h3>{{ t.name }} : {{ t.year }}</h3>
+        <div>{{t.genre}} : {{t.runtime}}</div>
+        <div><strong>Actors</strong>: {{t.actors}}</div>
+        <div><strong>Plot</strong>: {{t.plot}}</div>
+        <button id="addButton" class="btn btn-primary btn-sm pull-right">Add</button>
+    </div>
+</div>

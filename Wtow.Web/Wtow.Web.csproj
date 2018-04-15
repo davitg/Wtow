@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Wtow.Data\Wtow.Data.csproj" />
     <ProjectReference Include="..\Wtow.Domain\Wtow.Domain.csproj" />
+    <ProjectReference Include="..\Wtow.Service\Wtow.Service.csproj" />
   </ItemGroup>
 
 </Project>

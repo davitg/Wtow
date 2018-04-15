@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Wtow.Data;
 using Wtow.Domain;
+using Wtow.Service;
 
 namespace Wtow.Web
 {
@@ -34,6 +35,7 @@ namespace Wtow.Web
             */
 
             services.AddDbContext<TitleContext>(cfg => cfg.UseSqlServer(_config.GetConnectionString("Wtow")));
+            services.AddTransient<ITitleService, TitleService>();
 
             services.AddMvc();
         }

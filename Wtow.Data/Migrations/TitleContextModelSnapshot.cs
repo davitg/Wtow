@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 using Wtow.Data;
+using Wtow.Domain;
 
 namespace Wtow.Data.Migrations
 {
@@ -51,15 +52,21 @@ namespace Wtow.Data.Migrations
 
                     b.Property<string>("Country");
 
-                    b.Property<string>("DVD");
+                    b.Property<DateTime?>("DVD");
 
                     b.Property<string>("Director");
 
                     b.Property<string>("Genre");
 
+                    b.Property<string>("ImdbId");
+
+                    b.Property<float>("ImdbRating");
+
+                    b.Property<string>("ImdbVotes");
+
                     b.Property<string>("Language");
 
-                    b.Property<string>("Metascore");
+                    b.Property<float>("Metascore");
 
                     b.Property<string>("Name");
 
@@ -71,25 +78,19 @@ namespace Wtow.Data.Migrations
 
                     b.Property<string>("Rated");
 
-                    b.Property<string>("Released");
+                    b.Property<DateTime?>("Released");
 
                     b.Property<string>("Response");
 
                     b.Property<string>("Runtime");
 
-                    b.Property<string>("Type");
+                    b.Property<int>("TitleType");
 
                     b.Property<string>("Website");
 
                     b.Property<string>("Writer");
 
-                    b.Property<string>("Year");
-
-                    b.Property<string>("imdbID");
-
-                    b.Property<string>("imdbRating");
-
-                    b.Property<string>("imdbVotes");
+                    b.Property<int>("Year");
 
                     b.HasKey("TitleId");
 

@@ -8,15 +8,9 @@ namespace Wtow.Data
     {
         public TitleContext(DbContextOptions<TitleContext> options) : base(options)
         {
-
         }
 
         public DbSet<Title> Titles { get; set; }
         public DbSet<Rating> Ratings { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-           
-        }
     }
 }

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wtow.Data\Wtow.Data.csproj" />
+    <ProjectReference Include="..\Wtow.Domain\Wtow.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

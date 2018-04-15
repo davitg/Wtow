@@ -1,0 +1,11 @@
+﻿
+.title-tile {
+    height: 300px;
+}
+
+.title-tile img {
+    max-width: 100px;
+    float: left;
+    margin: 0 4px;
+    border: solid 1px black;
+}
