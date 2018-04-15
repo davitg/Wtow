@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using Wtow.Domain;
 
 namespace Wtow.Data
 {
-    public class TitleContext : DbContext
+    public class TitleContext : IdentityDbContext<AppUser>
     {
         public TitleContext(DbContextOptions<TitleContext> options) : base(options)
         {

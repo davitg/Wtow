@@ -26,16 +26,18 @@ namespace Wtow.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /* 
+            
             services.AddIdentity<AppUser, IdentityRole>(cfg =>
             {
                 cfg.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<TitleContext>();
-            */
+            
 
             services.AddDbContext<TitleContext>(cfg => cfg.UseSqlServer(_config.GetConnectionString("Wtow")));
             services.AddTransient<ITitleService, TitleService>();
+
+            services.AddTransient<TitleSeeder>();
 
             services.AddMvc();
         }
@@ -55,12 +57,24 @@ namespace Wtow.Web
 
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
+            if (env.IsDevelopment())
+            {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var seeder = scope.ServiceProvider.GetService<TitleSeeder>();
+                    seeder.Seed().Wait();
+                }
+            }
         }
     }
 }

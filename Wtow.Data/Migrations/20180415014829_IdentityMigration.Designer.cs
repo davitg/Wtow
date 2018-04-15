@@ -12,9 +12,10 @@ using Wtow.Domain;
 namespace Wtow.Data.Migrations
 {
     [DbContext(typeof(TitleContext))]
-    partial class TitleContextModelSnapshot : ModelSnapshot
+    [Migration("20180415014829_IdentityMigration")]
+    partial class IdentityMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
