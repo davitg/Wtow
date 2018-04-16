@@ -11,17 +11,30 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 var app_component_1 = require("./app.component");
 var titleList_component_1 = require("./title/titleList.component");
+var userTitles_component_1 = require("./user/userTitles.component");
 var titleService_1 = require("./shared/titleService");
+var router_1 = require("@angular/router");
+var routes = [
+    { path: "", component: titleList_component_1.TitleList },
+    { path: "/mytitles", component: userTitles_component_1.UserTitles }
+];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             declarations: [
-                app_component_1.AppComponent, titleList_component_1.TitleList
+                app_component_1.AppComponent,
+                titleList_component_1.TitleList,
+                userTitles_component_1.UserTitles
             ],
             imports: [
-                platform_browser_1.BrowserModule, http_1.HttpClientModule
+                platform_browser_1.BrowserModule,
+                http_1.HttpClientModule,
+                router_1.RouterModule.forRoot(routes, {
+                    useHash: true,
+                    enableTracing: false,
+                })
             ],
             providers: [titleService_1.TitleService],
             bootstrap: [app_component_1.AppComponent]

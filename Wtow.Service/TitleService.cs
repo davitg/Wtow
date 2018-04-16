@@ -20,6 +20,8 @@ namespace Wtow.Service
 
         public void AddTitle(Title title)
         {
+          
+
             _context.Titles.Add(title);
             _context.SaveChanges();
         }

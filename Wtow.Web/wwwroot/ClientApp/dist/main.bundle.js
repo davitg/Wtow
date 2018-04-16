@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "./ClientApp/$$_lazy_route_resource lazy recursive
 /***/ "./ClientApp/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2> Hello {{title}} </h2>\r\n<title-list></title-list>"
+module.exports = "<h2> Hello {{title}} </h2>\r\n<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -72,17 +72,30 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var app_component_1 = __webpack_require__("./ClientApp/app/app.component.ts");
 var titleList_component_1 = __webpack_require__("./ClientApp/app/title/titleList.component.ts");
+var userTitles_component_1 = __webpack_require__("./ClientApp/app/user/userTitles.component.ts");
 var titleService_1 = __webpack_require__("./ClientApp/app/shared/titleService.ts");
+var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+var routes = [
+    { path: "", component: titleList_component_1.TitleList },
+    { path: "/mytitles", component: userTitles_component_1.UserTitles }
+];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             declarations: [
-                app_component_1.AppComponent, titleList_component_1.TitleList
+                app_component_1.AppComponent,
+                titleList_component_1.TitleList,
+                userTitles_component_1.UserTitles
             ],
             imports: [
-                platform_browser_1.BrowserModule, http_1.HttpClientModule
+                platform_browser_1.BrowserModule,
+                http_1.HttpClientModule,
+                router_1.RouterModule.forRoot(routes, {
+                    useHash: true,
+                    enableTracing: false,
+                })
             ],
             providers: [titleService_1.TitleService],
             bootstrap: [app_component_1.AppComponent]
@@ -194,6 +207,42 @@ var TitleList = /** @class */ (function () {
     return TitleList;
 }());
 exports.TitleList = TitleList;
+
+
+/***/ }),
+
+/***/ "./ClientApp/app/user/userTitles.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <title>useTitles.component</title>\r\n</head>\r\n<body>\r\n    \r\n</body>\r\n</html>"
+
+/***/ }),
+
+/***/ "./ClientApp/app/user/userTitles.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var UserTitles = /** @class */ (function () {
+    function UserTitles() {
+    }
+    UserTitles = __decorate([
+        core_1.Component({
+            selector: "user-titles",
+            template: __webpack_require__("./ClientApp/app/user/userTitles.component.html")
+        })
+    ], UserTitles);
+    return UserTitles;
+}());
+exports.UserTitles = UserTitles;
 
 
 /***/ }),

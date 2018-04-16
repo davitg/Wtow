@@ -13,5 +13,6 @@ namespace Wtow.Data
 
         public DbSet<Title> Titles { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<UserTitle> UserTitles { get; set; }
     }
 }
