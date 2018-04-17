@@ -41,6 +41,5 @@ namespace Wtow.Domain
         public string BoxOffice { get; set; }
         public string Production { get; set; }
         public string Website { get; set; }
-        public string Response { get; set; }
     }
 }

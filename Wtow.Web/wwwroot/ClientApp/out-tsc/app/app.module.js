@@ -10,13 +10,15 @@ var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 var app_component_1 = require("./app.component");
+var home_component_1 = require("./home/home.component");
 var titleList_component_1 = require("./title/titleList.component");
 var userTitles_component_1 = require("./user/userTitles.component");
 var titleService_1 = require("./shared/titleService");
+var accountService_1 = require("./shared/accountService");
 var router_1 = require("@angular/router");
 var routes = [
-    { path: "", component: titleList_component_1.TitleList },
-    { path: "/mytitles", component: userTitles_component_1.UserTitles }
+    { path: "", component: home_component_1.HomeComponent },
+    { path: "mytitles", component: userTitles_component_1.UserTitles }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -25,6 +27,7 @@ var AppModule = /** @class */ (function () {
         core_1.NgModule({
             declarations: [
                 app_component_1.AppComponent,
+                home_component_1.HomeComponent,
                 titleList_component_1.TitleList,
                 userTitles_component_1.UserTitles
             ],
@@ -36,7 +39,7 @@ var AppModule = /** @class */ (function () {
                     enableTracing: false,
                 })
             ],
-            providers: [titleService_1.TitleService],
+            providers: [accountService_1.AccountService, titleService_1.TitleService],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Wtow.Data;
 using Wtow.Domain;
 using Wtow.Service;
@@ -32,6 +34,15 @@ namespace Wtow.Web
                 cfg.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<TitleContext>();
+
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(config => config.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidIssuer = _config["Tokens:Issuer"],
+                    ValidAudience = _config["Tokens:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
+                });
             
 
             services.AddDbContext<TitleContext>(cfg => cfg.UseSqlServer(_config.GetConnectionString("Wtow")));

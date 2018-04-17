@@ -12,9 +12,10 @@ using Wtow.Domain;
 namespace Wtow.Data.Migrations
 {
     [DbContext(typeof(TitleContext))]
-    partial class TitleContextModelSnapshot : ModelSnapshot
+    [Migration("20180417020239_UserTitleMap")]
+    partial class UserTitleMap
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,6 +244,8 @@ namespace Wtow.Data.Migrations
 
                     b.Property<DateTime?>("Released");
 
+                    b.Property<string>("Response");
+
                     b.Property<string>("Runtime");
 
                     b.Property<int>("TitleType");
@@ -267,7 +270,7 @@ namespace Wtow.Data.Migrations
 
                     b.Property<string>("Review");
 
-                    b.Property<DateTime?>("ReviewDate");
+                    b.Property<DateTime>("ReviewDate");
 
                     b.Property<int>("TitleId");
 

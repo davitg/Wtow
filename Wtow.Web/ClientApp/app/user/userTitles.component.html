@@ -1,9 +1,21 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>useTitles.component</title>
-</head>
-<body>
-    
-</body>
-</html>
+﻿<div class="row">
+    <div class="col-md-8">
+
+        <div class="row">
+            <h3>Select to edit</h3>
+        </div>
+        <div class="row">
+            <div class="title-tile col-md-6 well well-sm" *ngFor="let t of titles">
+                <img [src]="t.poster" [alt]="t.name" class="img-responsive" />
+                <h3>{{ t.name }} : {{ t.year }}</h3>
+                <div>{{t.genre}} : {{t.runtime}}</div>
+                <div><strong>Actors</strong>: {{t.actors}}</div>
+                <div><strong>Plot</strong>: {{t.plot}}</div>
+                <button id="addButton" class="btn btn-primary btn-sm pull-right">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        Editor here
+    </div>
+</div>

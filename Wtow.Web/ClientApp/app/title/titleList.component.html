@@ -1,4 +1,6 @@
 ﻿
+
+<a routerLink="mytitles" class="btn btn-primary">My Titles</a>
 <div class="row">
 
     <div class="title-tile col-md-4 well well-sm" *ngFor="let t of titles">
@@ -7,6 +9,7 @@
         <div>{{t.genre}} : {{t.runtime}}</div>
         <div><strong>Actors</strong>: {{t.actors}}</div>
         <div><strong>Plot</strong>: {{t.plot}}</div>
-        <button id="addButton" class="btn btn-primary btn-sm pull-right">Add</button>
+
+        <button id="addButton" class="btn btn-primary btn-sm pull-right" (click)="onTitleAdd(t.titleId)">+</button>
     </div>
 </div>
