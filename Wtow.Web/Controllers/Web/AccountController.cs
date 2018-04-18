@@ -74,7 +74,7 @@ namespace Wtow.Web.Controllers.Web
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateToken([FromBody] LoginViewModel model)
+        public async Task<IActionResult> CreateToken([FromBody]LoginViewModel model)
         {
             if (ModelState.IsValid)
             {

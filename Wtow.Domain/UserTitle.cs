@@ -11,10 +11,10 @@ namespace Wtow.Domain
         public int UserTitleMapId { get; set; }
 
 
-        public string UserId { get; set; }
-        public int Raiting { get; set; }
-        public bool WatchList { get; set; }
-        public string Review { get; set; }
-        public DateTime? ReviewDate { get; set; }
+       // public string       UserId          { get; set; }
+        public int          UserRaiting     { get; set; }
+        public bool         UserWatchList   { get; set; }
+        public string       UserReview      { get; set; }
+        public DateTime?    UserReviewDate  { get; set; }
     }
 }

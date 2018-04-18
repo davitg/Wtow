@@ -28,7 +28,7 @@ export class TitleList implements OnInit {
 
     onTitleAdd(titleId: string) {
         if (this.accountService.loginRequired) {
-         //   this.router.navigate(["login"])
+            this.router.navigate(["login"])
         }
         else {
             //titleService.AddTitleToMyList

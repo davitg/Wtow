@@ -24,6 +24,15 @@ var AccountService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    AccountService.prototype.login = function (creds) {
+        var _this = this;
+        return this.http.post("/account/CreateToken", creds)
+            .map(function (data) {
+            _this.token = data.token,
+                _this.tokenExpiration = data.expiration;
+            return true;
+        });
+    };
     AccountService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.HttpClient])

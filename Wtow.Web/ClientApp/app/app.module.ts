@@ -6,15 +6,19 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TitleList } from './title/titleList.component';
 import { UserTitles } from './user/userTitles.component';
+import { Login } from './login/login.component';
 
 import { TitleService } from './shared/titleService';
 import { AccountService } from './shared/accountService';
 
 import { RouterModule } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+
 
 let routes = [
     { path: "", component: HomeComponent },
-    { path: "mytitles", component: UserTitles }
+    { path: "mytitles", component: UserTitles },
+    { path: "login", component: Login }
 ];
 
 @NgModule({
@@ -22,11 +26,13 @@ let routes = [
         AppComponent,
         HomeComponent,
         TitleList,
-        UserTitles
+        UserTitles,
+        Login
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
+        FormsModule,
         RouterModule.forRoot(routes, {
             useHash: true,
             enableTracing: false,

@@ -74,12 +74,15 @@ var app_component_1 = __webpack_require__("./ClientApp/app/app.component.ts");
 var home_component_1 = __webpack_require__("./ClientApp/app/home/home.component.ts");
 var titleList_component_1 = __webpack_require__("./ClientApp/app/title/titleList.component.ts");
 var userTitles_component_1 = __webpack_require__("./ClientApp/app/user/userTitles.component.ts");
+var login_component_1 = __webpack_require__("./ClientApp/app/login/login.component.ts");
 var titleService_1 = __webpack_require__("./ClientApp/app/shared/titleService.ts");
 var accountService_1 = __webpack_require__("./ClientApp/app/shared/accountService.ts");
 var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 var routes = [
     { path: "", component: home_component_1.HomeComponent },
-    { path: "mytitles", component: userTitles_component_1.UserTitles }
+    { path: "mytitles", component: userTitles_component_1.UserTitles },
+    { path: "login", component: login_component_1.Login }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -90,11 +93,13 @@ var AppModule = /** @class */ (function () {
                 app_component_1.AppComponent,
                 home_component_1.HomeComponent,
                 titleList_component_1.TitleList,
-                userTitles_component_1.UserTitles
+                userTitles_component_1.UserTitles,
+                login_component_1.Login
             ],
             imports: [
                 platform_browser_1.BrowserModule,
                 http_1.HttpClientModule,
+                forms_1.FormsModule,
                 router_1.RouterModule.forRoot(routes, {
                     useHash: true,
                     enableTracing: false,
@@ -147,6 +152,66 @@ exports.HomeComponent = HomeComponent;
 
 /***/ }),
 
+/***/ "./ClientApp/app/login/login.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-4 col-md-offset-4\">\r\n        <div *ngIf=\"errorMessage\" class=\"alert alert-warning\">{{ errorMessage }}</div>\r\n        <form (submit)=\"onLogin()\" #theForm=\"ngForm\" novalidate>\r\n            <div class=\"form-group\">\r\n                <label for=\"username\">Username</label>\r\n                <input type=\"text\" name=\"username\" class=\"form-control\" [(ngModel)]=\"creds.username\" #username=\"ngModel\" required />\r\n                <div class=\"text-danger\" *ngIf=\"username.touched && username.invalid && username.errors.required\">Username is required!</div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"password\">Password</label>\r\n                <input type=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"creds.password\" #password=\"ngModel\" required />\r\n                <div class=\"text-danger\" *ngIf=\"password.touched && password.invalid && password.errors.required\">Password is required!</div>\r\n\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <input type=\"submit\" class=\"btn btn-success\" value=\"Login\" [disabled]=\"theForm.invalid\" />\r\n                <a routerLink=\"/\" class=\"btn btn btn-default'\">Cancel</a>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "./ClientApp/app/login/login.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var accountService_1 = __webpack_require__("./ClientApp/app/shared/accountService.ts");
+var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+var Login = /** @class */ (function () {
+    function Login(accountService, router) {
+        this.accountService = accountService;
+        this.router = router;
+        this.errorMessage = "";
+        this.creds = {
+            username: "",
+            passwprd: ""
+        };
+    }
+    Login.prototype.onLogin = function () {
+        var _this = this;
+        this.accountService.login(this.creds)
+            .subscribe(function (success) {
+            if (success) {
+                _this.router.navigate(["/"]);
+            }
+        }, function (error) {
+            _this.errorMessage = "Failed to login";
+        });
+    };
+    Login = __decorate([
+        core_1.Component({
+            selector: "login",
+            template: __webpack_require__("./ClientApp/app/login/login.component.html")
+        }),
+        __metadata("design:paramtypes", [accountService_1.AccountService, router_1.Router])
+    ], Login);
+    return Login;
+}());
+exports.Login = Login;
+
+
+/***/ }),
+
 /***/ "./ClientApp/app/shared/accountService.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -177,6 +242,15 @@ var AccountService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    AccountService.prototype.login = function (creds) {
+        var _this = this;
+        return this.http.post("/account/CreateToken", creds)
+            .map(function (data) {
+            _this.token = data.token,
+                _this.tokenExpiration = data.expiration;
+            return true;
+        });
+    };
     AccountService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.HttpClient])
@@ -240,7 +314,7 @@ module.exports = "\r\n.title-tile {\r\n    height: 300px;\r\n}\r\n\r\n.title-til
 /***/ "./ClientApp/app/title/titleList.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n<a routerLink=\"mytitles\" class=\"btn btn-primary\">My Titles</a>\r\n<div class=\"row\">\r\n\r\n    <div class=\"title-tile col-md-4 well well-sm\" *ngFor=\"let t of titles\">\r\n        <img [src]=\"t.poster\"  [alt]=\"t.name\" class=\"img-responsive\"/>\r\n        <h3>{{ t.name }} : {{ t.year }}</h3>\r\n        <div>{{t.genre}} : {{t.runtime}}</div>\r\n        <div><strong>Actors</strong>: {{t.actors}}</div>\r\n        <div><strong>Plot</strong>: {{t.plot}}</div>\r\n\r\n        <button id=\"addButton\" class=\"btn btn-primary btn-sm pull-right\" (click)=\"onTitleAdd(t.titleId)\">+</button>\r\n    </div>\r\n</div>"
+module.exports = "\r\n\r\n<a routerLink=\"mytitles\" class=\"btn btn-primary\">My Titles</a>\r\n<div class=\"row\">\r\n\r\n    <div class=\"title-tile col-md-4 well well-sm\" *ngFor=\"let t of titles\">\r\n        <img [src]=\"t.poster\"  [alt]=\"t.name\" class=\"img-responsive\"/>\r\n        <h3>{{ t.name }} : {{ t.year }}</h3>\r\n        <div>{{t.genre}} : {{t.runtime}}</div>\r\n        <div><strong>Actors</strong>: {{t.actors}}</div>\r\n        <div><strong>Plot</strong>: {{t.plot}}</div>\r\n        <div>\r\n            <input type=\"text\" />\r\n            <button id=\"addButton\" class=\"btn btn-primary btn-sm pull-right\" (click)=\"onTitleAdd(t.titleId)\">+</button>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -282,7 +356,7 @@ var TitleList = /** @class */ (function () {
     };
     TitleList.prototype.onTitleAdd = function (titleId) {
         if (this.accountService.loginRequired) {
-            //   this.router.navigate(["login"])
+            this.router.navigate(["login"]);
         }
         else {
             //titleService.AddTitleToMyList

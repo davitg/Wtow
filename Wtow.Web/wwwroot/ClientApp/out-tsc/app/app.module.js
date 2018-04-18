@@ -13,12 +13,15 @@ var app_component_1 = require("./app.component");
 var home_component_1 = require("./home/home.component");
 var titleList_component_1 = require("./title/titleList.component");
 var userTitles_component_1 = require("./user/userTitles.component");
+var login_component_1 = require("./login/login.component");
 var titleService_1 = require("./shared/titleService");
 var accountService_1 = require("./shared/accountService");
 var router_1 = require("@angular/router");
+var forms_1 = require("@angular/forms");
 var routes = [
     { path: "", component: home_component_1.HomeComponent },
-    { path: "mytitles", component: userTitles_component_1.UserTitles }
+    { path: "mytitles", component: userTitles_component_1.UserTitles },
+    { path: "login", component: login_component_1.Login }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -29,11 +32,13 @@ var AppModule = /** @class */ (function () {
                 app_component_1.AppComponent,
                 home_component_1.HomeComponent,
                 titleList_component_1.TitleList,
-                userTitles_component_1.UserTitles
+                userTitles_component_1.UserTitles,
+                login_component_1.Login
             ],
             imports: [
                 platform_browser_1.BrowserModule,
                 http_1.HttpClientModule,
+                forms_1.FormsModule,
                 router_1.RouterModule.forRoot(routes, {
                     useHash: true,
                     enableTracing: false,

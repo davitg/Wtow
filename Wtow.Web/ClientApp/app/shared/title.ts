@@ -21,14 +21,16 @@ export interface Title {
     imdbVotes: string;
     imdbId: string;
     titleType: number;
-    dvd?: any;
+    dvd?: string;
     boxOffice: string;
     production: string;
     website: string;
-    response: string;
+
+    UserRaiting: number;
+    UserWatchList: boolean
+    UserReview: boolean
+    UserReviewDate: boolean;
 }
-
-
 export interface Rating {
     ratingId: number;
     source: string;

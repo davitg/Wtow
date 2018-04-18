@@ -16,5 +16,15 @@ export class AccountService  {
     public get loginRequired(): boolean {
         return this.token.length == 0 || this.tokenExpiration > new Date();
     }
-    
+
+    login(creds): Observable<boolean> {
+        return this.http.post("/account/CreateToken", creds)
+            .map((data: any) => {
+                this.token = data.token,
+                this.tokenExpiration = data.expiration
+                return true;
+            });
+
+    }
+
 }

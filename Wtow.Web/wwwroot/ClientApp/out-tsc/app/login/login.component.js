@@ -10,43 +10,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var titleService_1 = require("../shared/titleService");
 var accountService_1 = require("../shared/accountService");
 var router_1 = require("@angular/router");
-var TitleList = /** @class */ (function () {
-    function TitleList(titleService, accountService, router) {
-        this.titleService = titleService;
+var Login = /** @class */ (function () {
+    function Login(accountService, router) {
         this.accountService = accountService;
         this.router = router;
-        this.titles = [];
-        this.titles = titleService.titles;
+        this.errorMessage = "";
+        this.creds = {
+            username: "",
+            passwprd: ""
+        };
     }
-    TitleList.prototype.ngOnInit = function () {
+    Login.prototype.onLogin = function () {
         var _this = this;
-        this.titleService.loadTitles()
+        this.accountService.login(this.creds)
             .subscribe(function (success) {
             if (success) {
-                _this.titles = _this.titleService.titles;
+                _this.router.navigate(["/"]);
             }
+        }, function (error) {
+            _this.errorMessage = "Failed to login";
         });
     };
-    TitleList.prototype.onTitleAdd = function (titleId) {
-        if (this.accountService.loginRequired) {
-            this.router.navigate(["login"]);
-        }
-        else {
-            //titleService.AddTitleToMyList
-        }
-    };
-    TitleList = __decorate([
+    Login = __decorate([
         core_1.Component({
-            selector: "title-list",
-            templateUrl: "titleList.component.html",
-            styleUrls: ["titleList.component.css"]
+            selector: "login",
+            templateUrl: "login.component.html"
         }),
-        __metadata("design:paramtypes", [titleService_1.TitleService, accountService_1.AccountService, router_1.Router])
-    ], TitleList);
-    return TitleList;
+        __metadata("design:paramtypes", [accountService_1.AccountService, router_1.Router])
+    ], Login);
+    return Login;
 }());
-exports.TitleList = TitleList;
-//# sourceMappingURL=titleList.component.js.map
+exports.Login = Login;
+//# sourceMappingURL=login.component.js.map
