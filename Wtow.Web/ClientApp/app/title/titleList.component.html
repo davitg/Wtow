@@ -10,8 +10,8 @@
         <div><strong>Actors</strong>: {{t.actors}}</div>
         <div><strong>Plot</strong>: {{t.plot}}</div>
         <div>
-            <input type="text" />
-            <button id="addButton" class="btn btn-primary btn-sm pull-right" (click)="onTitleAdd(t.titleId)">+</button>
+            <input [(ngModel)]="t.userRaiting" type="text" />
+            <button id="addButton" class="btn btn-primary btn-sm pull-right" (click)="onTitleRate(t)"><i class="fa fa-plus"></i></button>
         </div>
     </div>
 </div>

@@ -26,10 +26,10 @@ export interface Title {
     production: string;
     website: string;
 
-    UserRaiting: number;
-    UserWatchList: boolean
-    UserReview: boolean
-    UserReviewDate: boolean;
+    userRaiting: number;
+    userWatchList: boolean
+    userReview: boolean
+    userReviewDate: boolean;
 }
 export interface Rating {
     ratingId: number;

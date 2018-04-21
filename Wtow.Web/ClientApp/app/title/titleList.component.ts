@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: "title-list",
     templateUrl: "titleList.component.html",
-    styleUrls: [ "titleList.component.css" ]
+    styleUrls: ["titleList.component.css"]
 })
 export class TitleList implements OnInit {
 
@@ -15,7 +15,7 @@ export class TitleList implements OnInit {
         this.titles = titleService.titles
     }
 
-    public titles : Title[] = [];
+    public titles: Title[] = [];
 
     ngOnInit(): void {
         this.titleService.loadTitles()
@@ -26,12 +26,14 @@ export class TitleList implements OnInit {
             });
     }
 
-    onTitleAdd(titleId: string) {
+    onTitleRate(title: Title) {
+
         if (this.accountService.loginRequired) {
             this.router.navigate(["login"])
         }
         else {
-            //titleService.AddTitleToMyList
+            this.titleService.titleRate(title.titleId, title.userRaiting)
+                .subscribe(success => { }, error => { });
         }
     }
 } 

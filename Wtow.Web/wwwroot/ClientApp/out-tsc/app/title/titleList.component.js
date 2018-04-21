@@ -30,12 +30,13 @@ var TitleList = /** @class */ (function () {
             }
         });
     };
-    TitleList.prototype.onTitleAdd = function (titleId) {
+    TitleList.prototype.onTitleRate = function (title) {
         if (this.accountService.loginRequired) {
             this.router.navigate(["login"]);
         }
         else {
-            //titleService.AddTitleToMyList
+            this.titleService.titleRate(title.titleId, title.userRaiting)
+                .subscribe(function (success) { }, function (error) { });
         }
     };
     TitleList = __decorate([

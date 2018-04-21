@@ -10,7 +10,7 @@ export class AccountService  {
 
     constructor(private http: HttpClient) { }
 
-    private token: string = "";
+    public token: string = "";
     private tokenExpiration: Date;
 
     public get loginRequired(): boolean {

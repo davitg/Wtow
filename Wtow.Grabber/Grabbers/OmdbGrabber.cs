@@ -23,11 +23,11 @@ namespace Wtow.Grabber.Grabbers
             _log = log;
         }
 
-        public void GrabByImdbIds(string[] imdbIds)
+        public async void GrabByImdbIds(string[] imdbIds)
         {
             List<Title> titles;
 
-            titles = _titleService.GetAllTitles();
+            titles = await _titleService.GetAllTitles();
 
             foreach (string imdbId in imdbIds)
             {
